@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$LogName,
     [string]$Jar = '',
     [string]$Props = '',
@@ -12,7 +12,7 @@
 # Runs the isolated dedicated test server (\.prodserver-acf) with a baseline mod set, optionally the jar under
 # test, ApothicCurios and extra data packs. The world is reset from world_base before every run.
 $ErrorActionPreference = 'Stop'
-$root = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace'
+$root = (Split-Path $PSScriptRoot -Parent)
 $dir = Join-Path $root '.prodserver-acf'
 $mods = Join-Path $dir 'mods'
 $baseline = Join-Path $root '.prodserver\mods'

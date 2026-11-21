@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$LogName,
     [string]$Jar = '',
     [string[]]$Commands = @('acf diag item apotheosis:potion_charm', 'acf selftest'),
@@ -9,7 +9,7 @@
 # Starts the isolated dedicated server (.prodserver-acf) with RCON enabled, waits for "Done (", sends the
 # commands through RCON, prints the answers and stops the server with "stop". No game client is involved.
 $ErrorActionPreference = 'Stop'
-$root = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace'
+$root = (Split-Path $PSScriptRoot -Parent)
 $dir = Join-Path $root '.prodserver-acf'
 $mods = Join-Path $dir 'mods'
 $baseline = Join-Path $root '.prodserver\mods'

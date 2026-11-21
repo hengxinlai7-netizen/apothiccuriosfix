@@ -9,10 +9,10 @@ param(
 # Runs the isolated 6-jar-baseline test server (.prodserver-acf) with the given extra mods and JVM props.
 # The world is reset from world_base before every run so that each run loads the same data pack.
 $ErrorActionPreference = 'Stop'
-$root = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace'
+$root = (Split-Path $PSScriptRoot -Parent)
 $dir = Join-Path $root '.prodserver-acf'
 $mods = Join-Path $dir 'mods'
-$baseline = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace\.prodserver\mods'
+$baseline = (Join-Path (Split-Path $PSScriptRoot -Parent) '.prodserver\mods')
 
 # --- world reset -------------------------------------------------------------
 if (Test-Path (Join-Path $dir 'world')) { Remove-Item (Join-Path $dir 'world') -Recurse -Force }

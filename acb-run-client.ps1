@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$LogName,
     [string]$Jar = '',
     [string]$Props = '-Dapothiccuriosfix.clienttest=true',
@@ -9,7 +9,7 @@
 # --gameDir pointed at a scratch directory whose mods/ holds only the baseline mods + the jar under test.
 # Used to test the tooltip fix end to end: a dedicated server cannot render a tooltip.
 $ErrorActionPreference = 'Stop'
-$ws = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace'
+$ws = (Split-Path $PSScriptRoot -Parent)
 $mc = "$env:APPDATA\.minecraft"
 $versionName = '勇者之章3'
 $versionDir = Join-Path $mc "versions\$versionName"
@@ -17,7 +17,7 @@ $json = Get-Content (Join-Path $versionDir "$versionName.json") -Raw -Encoding U
 $libs = Join-Path $mc 'libraries'
 $gameDir = Join-Path $ws '.acb-client'
 $logs = Join-Path $ws 'logs'
-$java = 'C:\Program Files\Microsoft\jdk-21.0.8.9-hotspot\bin\java.exe'
+$java = (Join-Path $env:JAVA_HOME 'bin\java.exe')
 
 New-Item -ItemType Directory -Force $logs | Out-Null
 

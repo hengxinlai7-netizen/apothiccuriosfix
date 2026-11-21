@@ -118,6 +118,18 @@ return !cat.isNone() && bonusMap.containsKey(cat) && bonusMap.get(cat).supports(
 
 ---
 
+## 已知问题（正在排查）
+
+> ⚠️ **宝石镶在饰品栏物品上可能仍然不生效**（属性不涨）。
+>
+> 现状：`mixin/GemMixin` 在 `Gem#isValidIn` / `Gem#getBonus` 上加了回退，但两道回退都要求
+> `CurioLootCategories.isCurioCategory(LootCategory.forItem(stack))` 为真；而 Apotheosis 的
+> `LootCategory.forItem` 是按**物品标签**匹配的 —— 如果 `curios:<slot>` 类目没有对应的物品 tag，
+> 它对饰品会返回 `NONE`，于是整条宝石链路一次都不会触发。
+>
+> 也就是说：**词条（affix）侧已经工作，宝石侧还可能被 `forItem → NONE` 挡住**，正在定位与修复。
+> 本版本（1.20.1-1.3.0）如实发布，不宣称宝石已修好。
+
 ## 已知限制
 
 - **宝石只结算属性类 bonus**。需要运行时钩子的 bonus（附魔等级、药水效果、伤害减免、

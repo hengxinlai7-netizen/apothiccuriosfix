@@ -1,4 +1,4 @@
-﻿param(
+param(
     [Parameter(Mandatory = $true)][string]$InstanceName,
     [Parameter(Mandatory = $true)][string]$LogName,
     [string]$QuickPlay = '',
@@ -12,13 +12,13 @@
 # world with --quickPlaySingleplayer, then stops it as soon as the data packs have been applied. Used to verify
 # the installed jar + data pack against the actual mod set of an instance.
 $ErrorActionPreference = 'Stop'
-$ws = 'C:\Users\hengx\Documents\deepseek-harness\default-workspace'
+$ws = (Split-Path $PSScriptRoot -Parent)
 $mc = "$env:APPDATA\.minecraft"
 $versionDir = Join-Path $mc "versions\$InstanceName"
 $json = Get-Content (Join-Path $versionDir "$InstanceName.json") -Raw -Encoding UTF8 | ConvertFrom-Json
 $libs = Join-Path $mc 'libraries'
 $logs = Join-Path $ws 'logs'
-$java = 'C:\Program Files\Microsoft\jdk-21.0.8.9-hotspot\bin\java.exe'
+$java = (Join-Path $env:JAVA_HOME 'bin\java.exe')
 New-Item -ItemType Directory -Force $logs | Out-Null
 
 # ---- a private copy of the world so the player's save is never touched -----
