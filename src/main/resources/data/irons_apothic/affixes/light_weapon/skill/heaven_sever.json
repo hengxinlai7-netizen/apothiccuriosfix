@@ -1,0 +1,9 @@
+{
+    "type": "irons_apothic:heaven_sever",
+    "values": {
+        "epic":    { "min": 0.02, "steps": 3, "step": 0.0 },
+        "mythic":  { "min": 0.02, "steps": 3, "step": 0.0 },
+        "ancient": { "min": 0.02, "steps": 3, "step": 0.0 }
+    },
+    "types": [ "light_weapon", "staff" ]
+}

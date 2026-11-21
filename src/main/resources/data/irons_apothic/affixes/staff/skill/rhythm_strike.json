@@ -1,0 +1,17 @@
+{
+    "type": "irons_apothic:rhythm_strike",
+    "values": {
+        "common":   { "min": 0.10, "steps": 3, "step": 0.0 },
+        "uncommon": { "min": 0.10, "steps": 3, "step": 0.0 },
+        "rare":     { "min": 0.10, "steps": 3, "step": 0.0 },
+        "epic":     { "min": 0.10, "steps": 3, "step": 0.0 },
+        "mythic":   { "min": 0.10, "steps": 3, "step": 0.0 },
+        "ancient":  { "min": 0.10, "steps": 3, "step": 0.0 }
+    },
+    "types": [
+        "helmet", "chestplate", "leggings", "boots",
+        "sword", "bow", "crossbow", "trident", "shield",
+        "heavy_weapon", "pickaxe", "shovel",
+        "light_weapon", "staff", "spellbook"
+    ]
+}

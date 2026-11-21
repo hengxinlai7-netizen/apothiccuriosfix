@@ -1,0 +1,46 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+[[mods]]
+modId="${mod_id}"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+description='''${mod_description}'''
+[[dependencies.${mod_id}]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="apotheosis"
+    mandatory=true
+    versionRange="[7.4.0,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="curios"
+    mandatory=true
+    versionRange="[5.14.0+1.20.1,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.${mod_id}]]
+    modId="apothiccurios"
+    mandatory=false
+    versionRange="*"
+    ordering="AFTER"
+    side="BOTH"
+# 神化铁魔法(irons_apothic)模块:装了 Iron's Spellbooks 才加载,没装就整个模块不初始化
+[[dependencies.${mod_id}]]
+    modId="irons_spellbooks"
+    mandatory=false
+    versionRange="*"
+    ordering="AFTER"
+    side="BOTH"

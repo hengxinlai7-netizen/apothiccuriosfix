@@ -1,0 +1,23 @@
+{
+  "required": false,
+  "minVersion": "0.8",
+  "package": "dev.hengx.apothiccuriosfix.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "LootCategoryMixin",
+    "LootControllerMixin",
+    "AttributeAffixMixin",
+    "GemMixin",
+    "GemBonusAccessor",
+    "AttributeBonusAccessor",
+    "MeleeToAllDamageMixin",
+    "MmTetraLootCategoryMixin",
+    "AffixLevelByRarityMixin",
+  ],
+  "client": [
+    "client.AttributesLibClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 0
+  }
+}
