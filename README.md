@@ -176,6 +176,21 @@ libs/geckolib-forge-1.20.1-4.8.4.jar
 
 ---
 
+## 上游项目
+
+本项目的思路与部分实现整合自下面两个 **MIT 协议**的项目：
+
+- [Apothic Curios](https://github.com/Daripher/Apothic-Curios) —— 神化与 Curios 的兼容桥（MIT，据其仓库 LICENSE 声明）
+- [Apotheosis x Iron's Spellbooks Compat](https://www.curseforge.com/minecraft/mc-mods/apotheosis-x-irons-spellbooks-compat) —— 铁魔法 × 神化兼容（MIT，据作者/项目页声明）
+
+底层依赖：
+
+- [Apotheosis](https://www.curseforge.com/minecraft/mc-mods/apotheosis)
+- [Curios API](https://www.curseforge.com/minecraft/mc-mods/curios)
+- [Iron's Spellbooks](https://www.curseforge.com/minecraft/mc-mods/irons-spells-n-spellbooks)（可选）
+
+本项目同样以 MIT 发布。
+
 ## 协议
 
 [MIT](LICENSE) © 2026 hengx

@@ -8,6 +8,7 @@ import dev.shadowsoffire.apotheosis.adventure.socket.gem.Gem;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemRegistry;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.bonus.GemBonus;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 import javax.annotation.Nullable;
@@ -131,6 +132,20 @@ public final class GemCurioSupport {
     /** 类目是不是本模组给饰品注册的 {@code curios:<slot>}。 */
     public static boolean isCurioCategory(LootCategory category) {
         return category != null && !category.isNone() && category.getName().startsWith("curios:");
+    }
+
+    /**
+     * 与 {@code LootCategory.forItem} <b>无关</b>的饰品判定:直接看物品有没有命中某个
+     * {@code curios:<slot>} 的 tag。
+     *
+     * <p>为什么要另开一个判据:{@code modules.curiosReforgeable} 默认 {@code false},
+     * {@link dev.hengx.apothiccuriosfix.mixin.MmTetraLootCategoryMixin} 会把 {@code forItem} 的结果
+     * 强制抹成 {@link LootCategory#NONE}(3.1.0 的策略:饰品不参与神化生成)。
+     * 而宝石链路过去也拿 {@code forItem} 当唯一信号,于是跟着一起失效 ——
+     * 这就是"宝石镶得上、但属性一条都不加"的直接原因。</p>
+     */
+    public static boolean isCurioItem(ItemStack stack) {
+        return dev.hengx.apothiccuriosfix.category.CurioLootCategories.isCurioTagged(stack);
     }
 
     /** 这颗宝石是否在允许列表里(按注册表实例反查,不依赖任何名字推断)。 */

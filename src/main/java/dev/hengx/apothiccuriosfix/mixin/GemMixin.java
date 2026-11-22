@@ -52,7 +52,9 @@ public abstract class GemMixin {
             if (!GemCurioSupport.isAllowed((Gem) (Object) this)) {
                 return;
             }
-            if (!GemCurioSupport.isCurioCategory(LootCategory.forItem(itemStack))) {
+            // 1.3.1:不能用 forItem 判 —— curiosReforgeable 默认 false 时它被抹成 NONE,
+            // 整个回退就永远不触发。改成直接看物品有没有命中 curios:<slot> 的 tag。
+            if (!GemCurioSupport.isCurioItem(itemStack)) {
                 return;
             }
             if (GemCurioSupport.pick((Gem) (Object) this, this.bonuses, rarity) != null) {
@@ -71,7 +73,10 @@ public abstract class GemMixin {
             return;
         }
         try {
-            if (!GemCurioSupport.isCurioCategory(category)) {
+            // 1.3.1:镶嵌时记下的类别是 forItem 的结果,而饰品的 forItem 被策略抹成了 NONE,
+            // 所以这里必须同时接受 NONE —— 否则 GemInstance.isValid()/addModifiers() 永远拿不到 bonus。
+            // 安全性由 isAllowed(白名单)+ pick(能产出修饰符)两个条件兜住。
+            if (!GemCurioSupport.isCurioCategory(category) && !category.isNone()) {
                 return;
             }
             if (!GemCurioSupport.isAllowed((Gem) (Object) this)) {

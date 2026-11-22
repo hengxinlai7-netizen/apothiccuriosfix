@@ -9,6 +9,7 @@ import dev.shadowsoffire.apotheosis.adventure.affix.AffixInstance;
 import dev.shadowsoffire.apotheosis.adventure.loot.LootCategory;
 import dev.shadowsoffire.apotheosis.adventure.socket.SocketHelper;
 import dev.shadowsoffire.apotheosis.adventure.socket.gem.GemInstance;
+import dev.shadowsoffire.apotheosis.adventure.socket.gem.bonus.GemBonus;
 import dev.shadowsoffire.placebo.reload.DynamicHolder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -195,11 +196,11 @@ public final class CurioAffixAttributeBridge {
 
             // 饰品上的神化宝石(白名单见 GemCurioSupport):和词缀走同一条结算管线。
             // AP 只在原版装备槽上应用宝石属性,Curios 的槽位不在其中,所以这里补上。
-            // GemInstance 的类目就是镶嵌时记下的 curios:<slot>,而 GemMixin 让 getBonus 认这个类目,
-            // 所以 isValid()/addModifiers() 都能正常工作。
+            // 1.3.1:不能再用 forItem 判饰品(它被 curiosReforgeable=false 的策略抹成 NONE),
+            // 也不能走 gem.addModifiers(...) —— 那个方法按 cat.getSlots() 过滤,饰品是 NONE(空数组)
+            // ⇒ 一条都不产出。这里直接调 GemMixin 认过的那条 bonus。
             try {
-                LootCategory gemCategory = LootCategory.forItem(stack);
-                if (GemCurioSupport.isCurioCategory(gemCategory)) {
+                if (GemCurioSupport.isCurioItem(stack)) {
                     for (GemInstance gem : SocketHelper.getGems(stack)) {
                         if (gem == null || !gem.isValid()) {
                             continue;
@@ -208,7 +209,12 @@ public final class CurioAffixAttributeBridge {
                         if (gemId == null) {
                             continue;
                         }
-                        gem.addModifiers(EquipmentSlot.MAINHAND, (attribute, modifier) -> {
+                        GemBonus bonus = GemCurioSupport.pick(gem.gem().get(),
+                                gem.gem().get().getBonuses(), gem.rarity().get());
+                        if (bonus == null) {
+                            continue;
+                        }
+                        bonus.addModifiers(gem.gemStack(), gem.rarity().get(), (attribute, modifier) -> {
                             if (attribute == null || modifier == null || modifier.getAmount() == 0.0D) {
                                 return;
                             }
