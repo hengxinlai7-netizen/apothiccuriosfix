@@ -89,7 +89,8 @@ public class ApothicCuriosFix {
         if (AcfConfig.weaknessBreaker()) {
             MinecraftForge.EVENT_BUS.register(dev.hengx.apothiccuriosfix.event.WeaknessBreakerHandler.class);
         }
-        MinecraftForge.EVENT_BUS.register(SelfTest.class);
+        MinecraftForge.EVENT_BUS.register(dev.hengx.apothiccuriosfix.selftest.GemSelfTest.class);
+            MinecraftForge.EVENT_BUS.register(SelfTest.class);
         MinecraftForge.EVENT_BUS.register(ClientSelfTest.class);
         MinecraftForge.EVENT_BUS.register(DiagCommand.class);
 
